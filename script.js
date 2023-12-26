@@ -7,3 +7,5 @@ let monsterHealth;
 let inventory = ["stick"];
 
 const button1 = document.querySelector("#button1");
+
+// adding a comment to see if it works
