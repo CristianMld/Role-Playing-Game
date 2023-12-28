@@ -31,7 +31,7 @@ function goStore() {
 }
 
 function goCave() {
-    console.log("Going to cave.");
+    update(locations[2]);
 }
 
 function fightDragon() {
@@ -39,11 +39,24 @@ function fightDragon() {
 }
 
 function buyHealth() {
-
+    if (gold >= 10) {
+        gold -= 10;
+        health += 10;
+        goldText.innerText = gold;
+        healthText.innerText = health;
+    } else {
+        text.innerText = "You do not have enough gold to buy health.";
+    }
 }
 
 function buyWeapon() {
-
+    if (gold >= 30) {
+        gold -= 30;
+        currentWeapon++;
+        goldText.innerText = gold;
+        let newWeapon = weapons[currentWeapon].name;
+        text.innerText = "You now have a new weapon.";
+    }
 }
 
 function update(location) {
@@ -55,6 +68,25 @@ function update(location) {
     button3.onclick = location["button functions"][2];
     text.innerText = location.text;
 }
+
+const weapons = [
+    {
+      name: "stick",
+      power: 5
+    },
+    {
+      name: "dagger",
+      power: 30
+    },
+    {
+      name: "claw hammer",
+      power: 50
+    },
+    {
+      name: "sword",
+      power: 100
+    }
+  ];
 
 const locations = [
     {
@@ -68,6 +100,12 @@ const locations = [
         "button text": ["Buy 10 health (10 gold)", "Buy weapon (30 gold)", "Go to town square"],
         "button functions": [buyHealth, buyWeapon, goTown],
         text: "You enter the store."
+    },
+    {
+        name: "cave",
+        "button text": ["Fight slime", "Fight fanged beast", "Go to town square"],
+        "button functions": [fightSlime, fightBeast, goTown],
+        text: "You enter the cave. You see some monsters."
     }
 ];
 
